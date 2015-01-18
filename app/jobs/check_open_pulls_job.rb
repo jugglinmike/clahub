@@ -24,8 +24,10 @@ class CheckOpenPullsJob
 
   def pull_request_commit_groups
     pull_mashes.map do |pull_mash|
-      CommitGroup.fromPullRequest(
-        @owner, @user_name, @repo_name, pull_mash.number)
+      group = CommitGroup.new(@user_name, @repo_name)
+      group.fetch_from_pull_request(pull_mash.number)
+
+      group
     end
   end
 
