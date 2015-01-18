@@ -1,3 +1,23 @@
+# This thing needs:
+# - repo owner name (user or org)
+# - repo name
+# - data for zero or more commits
+#   - id
+#   - author.email
+#   - author.username
+#   - committer.email
+#   - committer.username
+#
+# To be used by:
+# - `push` web hook
+#    - Info available: all
+#    - Info missing: none
+# - `pull_request` web hook
+#    - Info available: pull request number, repo name, repo owner name
+#    - Info missing: commits
+# - `check_open_pull_requests` job
+#    - Info available: repo name, repo owner name
+#    - Info missing: commits
 class PushStatusChecker
   STATUS_DESCRIPTIONS = {
     'success' => 'All contributors have signed the Contributor License Agreement.',

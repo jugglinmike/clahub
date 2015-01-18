@@ -15,9 +15,19 @@ class CheckOpenPullsJob
     pushes.each do |push|
       PushStatusChecker.new(push).check_and_update
     end
+    # pull_request_commit_groups.each do |commit_group|
+    #   commit_group.check_and_update
+    # end
   end
 
   private
+
+  def pull_request_commit_groups
+    pull_mashes.map do |pull_mash|
+      CommitGroup.fromPullRequest(
+        @owner, @user_name, @repo_name, pull_mash.number)
+    end
+  end
 
   def pushes
     pull_mashes.map do |pull_mash|
